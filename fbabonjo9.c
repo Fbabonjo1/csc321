@@ -7,41 +7,34 @@
 #include <time.h>
 
 int main() {
-    int randomNumber, guess;
+	int i, guess, y;
 
-    
-    srand(time(NULL));
-    randomNumber = rand() % 20 + 1;
+	srand(time(NULL));
+	y = (rand() % 20) + 1;
 
-    printf("Guess a number between 1 and 20:\n");
+	printf("Choose a number that's between 1 and 20:");
+	
+	while (guess < 1 || guess > 20) {
+		scanf("%d", &guess);
 
-    while (1) {
-        scanf("%d", &guess);
+		if (guess < 1 || guess > 20) {
+		puts("The number's out of range.  Try again.");
+		continue;
+		}
 
-        
-        if (guess < 1 || guess > 20) {
-            printf("That number's out of range!  Try another!\n");
-            continue;
-        }
+		if (guess < y) {
+			printf("That's too low.  The answer was %d \n",y);
+		}
+		else if (guess > y){
+			printf("That's too high.  The answer was %d \n",y);
+		}
 
-        
-        if (guess < randomNumber) {
-            printf("That's too low!  The number was %d!\n", randomNumber);
-            break;
-        } else if (guess > randomNumber) {
-            printf("That's too high!  The number was %d!\n", randomNumber);
-            break;
-        } else {
-            printf("That is correct!  Good job!\n");
-
-            
-            for (int i = 0; i < guess; i++) {
-                printf("That is correct!  Good job!\n");
-            }
-            break;
-        }
-    }
-
-    return 0;
+		else {
+			printf("Crangtulations!  You guess the correct number!\n");
+			for (int i = 0; i < guess; i++) {
+				printf("You win!  This was the number: %d \n",y);
+			}
+		}
+	}
+	return EXIT_SUCCESS;
 }
-
